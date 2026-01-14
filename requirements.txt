@@ -1,3 +1,5 @@
 requests
 pyinstaller
 PyQt5
+dotenv
+python-steam-api
