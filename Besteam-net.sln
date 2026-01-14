@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Besteam-net", "Besteam-net\Besteam-net.csproj", "{A876A418-59C2-4ACD-A9F1-3017A58AF02C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A876A418-59C2-4ACD-A9F1-3017A58AF02C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A876A418-59C2-4ACD-A9F1-3017A58AF02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A876A418-59C2-4ACD-A9F1-3017A58AF02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A876A418-59C2-4ACD-A9F1-3017A58AF02C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
