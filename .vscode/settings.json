@@ -1,0 +1,7 @@
+{
+    "python.analysis.typeCheckingMode": "standard",
+    "python.createEnvironment.trigger": "prompt",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "editor.tabSize": 4
+}

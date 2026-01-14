@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "New build",
+            "type": "shell",
+            "command": "pyinstaller --onefile --windowed main.py",
+            "problemMatcher": []
+        }
+    ]
+}
