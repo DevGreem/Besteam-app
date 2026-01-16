@@ -1,12 +1,16 @@
 from PyQt5.QtWidgets import * # type: ignore
+from src import AppData
+from . import LoginWindow
 
 class MainWindow(QMainWindow):
     
     def __init__(self, parent=None, *args):
         super().__init__(parent)
         
-        self.setMinimumSize(500, 500)
-        self.setWindowTitle("Besteam")
+        data: AppData = AppData()
         
-        login_title: QLabel = QLabel("Put your steam ID", self)
+        if len(data.users) > 0:
+            return
+        
+        window = LoginWindow(self)
         

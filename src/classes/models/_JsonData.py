@@ -1,15 +1,16 @@
 import json
 from pathlib import Path
 from abc import ABC
+from typing import Type, Self
 
 class JsonData(ABC):
     
     @classmethod
-    def from_json(cls, json: dict) -> "JsonData":
-        return cls(**json)
+    def from_json(cls, json: dict) -> Self:
+        return cls(**json) #
 
     @classmethod
-    def from_json_file(cls, path: str|Path) -> "JsonData":
+    def from_json_file(cls, path: str|Path) -> Self:
         
         with open(path, "r") as file:
             data = json.load(file)

@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import TypeVar, Generic, Type, Iterator
+from typing import TypeVar, Generic, Type, Iterator, overload
 from . import JsonData
 
 T = TypeVar("T", bound=JsonData)
@@ -9,7 +9,7 @@ class JsonListData(Generic[T]):
     """No instantiate this class"""
     
     def __init__(self, items: list[T]):
-        self._items = items
+        self._items: list[T] = items
     
     @classmethod
     def from_json(cls, model: Type[T], json: list[dict]) -> "JsonListData[T]":
@@ -37,6 +37,13 @@ class JsonListData(Generic[T]):
     def save_in_file(self, path: str | Path):
         
         JsonListData.save_items_in_file(path, self._items)
+
+    
+    def add_model(self, model: T) -> None:
+        self._items.append(model)
+    
+    def remove_model(self, index: int) -> T:
+        return self._items.pop(index)
     
     def __iter__(self) -> Iterator[T]:
         return iter(self._items)
