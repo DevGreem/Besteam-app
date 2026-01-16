@@ -1,1 +1,1 @@
-from _SteamClient import SteamClient
+from ._SteamClient import SteamClient
