@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 
-class Settings(BaseSettings):
+class EnvVars(BaseSettings):
     '''
     Class for manage Environment Variables
     '''
@@ -17,5 +17,5 @@ class Settings(BaseSettings):
         return self.steam_api_key
     
 @lru_cache
-def get_settings() -> Settings:
-    return Settings() # type: ignore
+def get_env_vars() -> EnvVars:
+    return EnvVars() # type: ignore

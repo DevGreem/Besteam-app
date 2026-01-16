@@ -1,3 +1,3 @@
-from ._Settings import get_settings
+from ._EnvVars import get_env_vars
 
-settings = get_settings()
+EnvVars = get_env_vars()
