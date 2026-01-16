@@ -5,7 +5,11 @@ from abc import ABC
 class JsonData(ABC):
     
     @classmethod
-    def from_json(cls, path: str|Path) -> "JsonData":
+    def from_json(cls, json: dict) -> "JsonData":
+        return cls(**json)
+
+    @classmethod
+    def from_json_file(cls, path: str|Path) -> "JsonData":
         
         with open(path, "r") as file:
             data = json.load(file)

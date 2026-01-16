@@ -1,8 +1,8 @@
-from . import UserData
+from . import UserData, JsonListData
 
 class AppData:
     
-    users: list[UserData] = []
     
     def __init__(self) -> None:
-        self.users = UserData.from_json("users.json") # type: ignore
+        self.users: JsonListData[UserData] = JsonListData.from_json_file(UserData, 'users.json')
+        

@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import TypeVar, Generic, Type
+from typing import TypeVar, Generic, Type, Iterator
 from . import JsonData
 
 T = TypeVar("T", bound=JsonData)
@@ -9,10 +9,14 @@ class JsonListData(Generic[T]):
     """No instantiate this class"""
     
     def __init__(self, items: list[T]):
-        self.items = items
+        self._items = items
     
     @classmethod
-    def from_json(cls, model: Type[T], path: str|Path) -> "JsonListData[T]":
+    def from_json(cls, model: Type[T], json: list[dict]) -> "JsonListData[T]":
+        return cls([model.from_json(item) for item in json]) # type: ignore
+    
+    @classmethod
+    def from_json_file(cls, model: Type[T], path: str|Path) -> "JsonListData[T]":
         
         with open(path, "r") as file:
             data = json.load(file)
@@ -32,4 +36,16 @@ class JsonListData(Generic[T]):
 
     def save_in_file(self, path: str | Path):
         
-        JsonListData.save_items_in_file(path, self.items)
+        JsonListData.save_items_in_file(path, self._items)
+    
+    def __iter__(self) -> Iterator[T]:
+        return iter(self._items)
+    
+    def __len__(self) -> int:
+        return len(self._items)
+    
+    def __getitem__(self, index: int) -> T:
+        return self._items[index]
+
+    def __contains__(self, item: T) -> bool:
+        return item in self._items
