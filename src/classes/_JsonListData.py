@@ -13,7 +13,7 @@ class JsonListData(Generic[T]):
     
     @classmethod
     def from_json(cls, model: Type[T], json: list[dict]) -> "JsonListData[T]":
-        return cls([model.from_json(item) for item in json]) # type: ignore
+        return cls([model.model_validate(item) for item in json]) # type: ignore
     
     @classmethod
     def from_json_file(cls, model: Type[T], path: str|Path) -> "JsonListData[T]":
@@ -24,7 +24,7 @@ class JsonListData(Generic[T]):
         if not isinstance(data, list):
             raise TypeError("I await an JSON array!")
         
-        items: list[T] = [model.from_json(item) for item in data] # type: ignore
+        items: list[T] = [model.model_validate(item) for item in data] # type: ignore
         
         return cls(items)
     
@@ -32,7 +32,7 @@ class JsonListData(Generic[T]):
     def save_items_in_file(cls, path: str | Path, items: list[T]) -> None:
         
         with open(path, "w") as file:
-            json.dump([item.to_json() for item in items], file, indent=4)
+            json.dump([item.model_dump_json() for item in items], file, indent=4)
 
     def save_in_file(self, path: str | Path):
         

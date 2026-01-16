@@ -1,13 +1,10 @@
 import json
 from pathlib import Path
 from abc import ABC
-from typing import Type, Self
+from typing import Self
+from pydantic import BaseModel
 
-class JsonData(ABC):
-    
-    @classmethod
-    def from_json(cls, json: dict) -> Self:
-        return cls(**json) #
+class JsonData(ABC, BaseModel):
 
     @classmethod
     def from_json_file(cls, path: str|Path) -> Self:
@@ -15,12 +12,9 @@ class JsonData(ABC):
         with open(path, "r") as file:
             data = json.load(file)
         
-        return cls(**data)
-    
-    def to_json(self) -> dict:
-        return self.__dict__
+        return cls.model_validate(data)
     
     def save_in_file(self, path: str | Path) -> None:
         
         with open(path, "w") as file:
-            json.dump(self.to_json(), file, indent=4)
+            json.dump(self.model_dump_json(), file, indent=4)
