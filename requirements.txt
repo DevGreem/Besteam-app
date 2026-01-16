@@ -3,3 +3,5 @@ pyinstaller
 PyQt5
 dotenv
 python-steam-api
+pytest
+pydantic_settings
