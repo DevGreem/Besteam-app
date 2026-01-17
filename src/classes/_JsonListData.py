@@ -38,15 +38,18 @@ class JsonListData(Generic[T]):
     def save_items_in_file(path: str | Path, items: list[T]) -> None:
         
         with open(path, "w") as file:
-            json.dump([item.model_dump() for item in items], file, indent=4)
+            json.dump(JsonListData.models_dump_items(items), file, indent=4)
 
     def save_in_file(self, path: str | Path):
         
         JsonListData.save_items_in_file(path, self._items)
 
+    @staticmethod
+    def models_dump_items(items: list[T]) -> list[dict[str, Any]]:
+        return [item.model_dump() for item in items]
+
     def models_dump(self) -> list[dict[str, Any]]:
-        
-        return [item.model_dump() for item in self._items]
+        return JsonListData.models_dump_items(self._items)
     
     def add_model(self, model: T) -> None:
         self._items.append(model)
