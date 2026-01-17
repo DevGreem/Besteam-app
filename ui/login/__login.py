@@ -1,9 +1,9 @@
 from PyQt6.QtGui import QResizeEvent
 from PyQt6.QtWidgets import * # type: ignore
 from PyQt6.QtCore import Qt, QSize
-from src import AppData, Window
+from src import AppData
 
-class LoginWindow(Window):
+class LoginWindow(QWidget):
     
     def __init__(self, parent=None, *args):
         super().__init__(parent)

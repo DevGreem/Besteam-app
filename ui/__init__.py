@@ -1,5 +1,5 @@
 from ._WindowWrapper import WindowWrapper
-from ._LoginWindow import LoginWindow
-from ._LibraryWindow import *
+from .login import LoginWindow
+from .library import *
 
 from ._MainWindow import MainWindow

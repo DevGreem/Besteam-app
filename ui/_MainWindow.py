@@ -22,4 +22,3 @@ class MainWindow(WindowWrapper):
         
         self.login_window.resize(a0.size())
         return super().resizeEvent(a0)
-        
