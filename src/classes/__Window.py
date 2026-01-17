@@ -1,8 +1,7 @@
-from PyQt5.QtWidgets import QWidget
-from PyQt5.QtCore import pyqtSignal, QSize
+from PyQt6.QtWidgets import QWidget
+from PyQt6.QtCore import pyqtSignal, QSize
 from . import Signal
 from typing import cast
-
 
 class Window(QWidget):
     

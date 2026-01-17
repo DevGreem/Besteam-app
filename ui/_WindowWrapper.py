@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow
 from src import StylesManager
 
 class WindowWrapper(QMainWindow):

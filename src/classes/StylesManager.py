@@ -1,5 +1,5 @@
 from pathlib import Path
-from PyQt5.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow
 
 def load_style_file(style_path: str|Path, window: QMainWindow):
         

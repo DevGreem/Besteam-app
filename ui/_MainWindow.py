@@ -1,5 +1,5 @@
-from PyQt5.QtGui import QResizeEvent
-from PyQt5.QtWidgets import * # type: ignore
+from PyQt6.QtGui import QResizeEvent
+from PyQt6.QtWidgets import * # type: ignore
 from src import AppData
 from . import WindowWrapper, LoginWindow
 
