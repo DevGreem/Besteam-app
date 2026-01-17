@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "usernamehw.errorlens",
+        "ms-toolsai.jupyter",
+        "christian-kohler.path-intellisense",
+        "seanwu.vscode-qt-for-python",
+    ]
+}

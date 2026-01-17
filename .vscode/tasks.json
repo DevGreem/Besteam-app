@@ -6,6 +6,16 @@
             "type": "shell",
             "command": "pyinstaller --onefile --windowed main.py",
             "problemMatcher": []
+        },
+        {
+            "label": "New UI",
+            "type": "shell",
+            "command": [
+                "mkdir ${fileDirname}/${selectedText} &&",
+                "echo \"from PyQt6.QtWidgets import * # type: ignore \n\n",
+                "class ${selectedText}Container(QWidget):\n\tpass\" > ${fileDirname}/${selectedText}/__${selectedText}.py &&",
+                "touch ${fileDirname}/${selectedText}/__init__.py"
+            ]
         }
     ]
 }
