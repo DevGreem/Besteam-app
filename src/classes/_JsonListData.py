@@ -1,6 +1,12 @@
 import json
 from pathlib import Path
-from typing import TypeVar, Generic, Type, Iterator, overload
+from typing import (
+    TypeVar,
+    Generic,
+    Type,
+    Iterator,
+    Any
+)
 from . import JsonData
 
 T = TypeVar("T", bound=JsonData)
@@ -28,16 +34,19 @@ class JsonListData(Generic[T]):
         
         return cls(items)
     
-    @classmethod
-    def save_items_in_file(cls, path: str | Path, items: list[T]) -> None:
+    @staticmethod
+    def save_items_in_file(path: str | Path, items: list[T]) -> None:
         
         with open(path, "w") as file:
-            json.dump([item.model_dump_json() for item in items], file, indent=4)
+            json.dump([item.model_dump() for item in items], file, indent=4)
 
     def save_in_file(self, path: str | Path):
         
         JsonListData.save_items_in_file(path, self._items)
 
+    def models_dump(self) -> list[dict[str, Any]]:
+        
+        return [item.model_dump() for item in self._items]
     
     def add_model(self, model: T) -> None:
         self._items.append(model)

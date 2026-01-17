@@ -3,6 +3,7 @@ from . import (
     JsonListData,
     AppConfig
 )
+from functools import lru_cache
 
 class AppData:
     
@@ -13,3 +14,7 @@ class AppData:
     def save(self):
         
         self.users.save_in_file(self.app_config.users_path)
+
+@lru_cache
+def get_app_data() -> AppData:
+    return AppData()

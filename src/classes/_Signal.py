@@ -1,4 +1,10 @@
-from typing import TypeVarTuple, Protocol, Callable, Optional
+from typing import (
+    TypeVarTuple,
+    Protocol,
+    Callable,
+    Optional,
+    Any
+)
 
 Ts = TypeVarTuple("Ts")
 
@@ -11,6 +17,6 @@ class Signal(Protocol[*Ts]):
     
     def emit(self, *args: *Ts): ...
     
-    def connect(self, slot: Callable) -> tuple[*Ts]: ...
+    def connect(self, slot: Callable[[*Ts], Any]): ...
     
-    def disconnect(self, handler: Optional[Callable]): ...
+    def disconnect(self, handler: Optional[Callable[[*Ts], Any]]): ...
