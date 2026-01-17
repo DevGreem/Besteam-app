@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QResizeEvent
 from PyQt5.QtWidgets import * # type: ignore
 from src import AppData
 from . import WindowWrapper, LoginWindow
@@ -13,4 +14,12 @@ class MainWindow(WindowWrapper):
         
         if len(data.users) > 0:
             return
+    
+    def resizeEvent(self, a0: QResizeEvent | None) -> None:
+        
+        if not a0:
+            return
+        
+        self.login_window.resize(a0.size())
+        return super().resizeEvent(a0)
         

@@ -7,6 +7,6 @@ class WindowWrapper(QMainWindow):
         super().__init__(parent)
         self.setStyleSheet('styles/global.css')
         self.setWindowTitle("Besteam")
-        self.setFixedSize(500, 500)
+        self.resize(500, 500)
         
         StylesManager.load_style_file("ui/styles/global.css", self)

@@ -5,3 +5,7 @@ QMainWindow {
 QLabel {
     color: #fff;
 }
+
+QInputDialog {
+    background: #fff;
+}
