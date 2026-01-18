@@ -1,26 +1,22 @@
-from PyQt6.QtWidgets import * # type: ignore
-from src import SteamClient, AppData
+from PyQt6.QtWidgets import QWidget
+from src import AppData
+from src.steam import Player
+from .components import UsersGrid
 
 class SignInContainer(QWidget):
     
     def __init__(self, parent=None, *args):
         super().__init__(parent)
         
-        self.users_container = QWidget()
+        self.users_container = QWidget(self)
+        self.users_container.resize(500, 500)
         
-        self.users_layout = QGridLayout(self.users_container)
-
-        steam: SteamClient = SteamClient()
+        self.users_grid = UsersGrid(3, 3, self.users_container)
         
-        self.users_details = steam.users.get_user_details(
-            ",".join(
-                [
-                    str(item["id"])
-                    for item in 
-                    AppData.users.models_dump()
-                ]
-            ),
-            single=False
-        )
+        self.users_grid.clicked_user.connect(self._on_press_user)
         
-        print(self.users_details)
+        self.users_container.setLayout(self.users_grid)
+        
+    def _on_press_user(self, user: Player):
+        print(f'Logged with {user.steamid}')
+        AppData.login_user(int(user.steamid))
