@@ -1,3 +1,5 @@
 {
+    "environment": "testing",
+    "steam_api_key": "8A3AD3FADC3061E15CD4EAD4C8EC3011",
     "users_path": "src/data/users.json"
 }
