@@ -1,7 +1,7 @@
-from src import EnvVars
+from . import AppData
 from typing import Any
 
 def log(text: Any):
         
-    if EnvVars.is_testing():
+    if AppData.app_config.environment == "testing":
         print(text)
