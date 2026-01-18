@@ -1,6 +1,7 @@
 import os
 from steam_web_api import Client, Apps
 from . import _Users
+from src import AppData
 
 class SteamClient:
     
@@ -9,7 +10,7 @@ class SteamClient:
     def __init__(self, headers: dict = {}):
         """Constructor for Steam API client"""
         
-        KEY = os.environ.get('STEAM_API_KEY')
+        KEY = AppData.app_config.steam_api_key
     
         if not KEY:
             return
