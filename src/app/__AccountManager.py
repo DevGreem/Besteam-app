@@ -1,4 +1,3 @@
-from . import AppData
 from functools import lru_cache
 from PyQt6.QtCore import QObject, pyqtSignal
 from src import Signal, InvalidUserId

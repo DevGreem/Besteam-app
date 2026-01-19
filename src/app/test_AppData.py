@@ -1,4 +1,4 @@
-from . import AppData
+from src import AppData
 
 def test_save_json():
     

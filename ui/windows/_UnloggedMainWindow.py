@@ -1,5 +1,5 @@
 from PyQt6.QtGui import QResizeEvent
-from PyQt6.QtWidgets import * # type: ignore
+from PyQt6.QtWidgets import QWidget
 from src import AppData
 from . import (
     WindowWrapper,
@@ -7,7 +7,7 @@ from . import (
     SignInContainer
 )
 
-class MainWindow(WindowWrapper):
+class UnloggedMainWindow(WindowWrapper):
     
     def __init__(self, parent=None, *args):
         super().__init__(parent)
@@ -21,7 +21,7 @@ class MainWindow(WindowWrapper):
             return
         
         self.set_window(LogInContainer())
-        self.actual_window.on_log_user.connect(self._on_log_user) # type: ignore
+        self.actual_window.on_log_user.connect(self._on_sign_up_user) # type: ignore
     
     def set_window(self, widget: QWidget):
         
@@ -44,6 +44,7 @@ class MainWindow(WindowWrapper):
         
         return super().resizeEvent(a0)
     
-    def _on_log_user(self, id: int):
+    def _on_sign_up_user(self, id: int):
         
         self.set_window(SignInContainer())
+        self.actual_window
