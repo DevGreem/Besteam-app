@@ -8,7 +8,7 @@ load_dotenv()
 
 if __name__ == "__main__":
     APP: QApplication = QApplication(sys.argv)
-    ICON: QIcon = QIcon('assets/icon.png')
+    ICON: QIcon = QIcon('icon.png')
     APP.setWindowIcon(ICON)
     
     main_window = MainWindow()
