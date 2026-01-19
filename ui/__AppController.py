@@ -1,5 +1,5 @@
 from PyQt6.QtCore import QObject
-from .windows import UnloggedMainWindow, LoggedMainWindow
+from . import UnloggedMainWindow, LoggedMainWindow
 from src import AccountManager
 
 class AppController(QObject):

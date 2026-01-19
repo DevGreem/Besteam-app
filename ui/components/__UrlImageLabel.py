@@ -1,10 +1,10 @@
-from PyQt6.QtWidgets import QLabel, QWidget, QSizePolicy
+from PyQt6.QtWidgets import QLabel, QWidget
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from PyQt6.QtCore import QUrl, Qt
+from PyQt6.QtCore import QUrl
 from typing import overload, Optional
 
-class ImageLabel(QLabel):
+class UrlImageLabel(QLabel):
     
     @overload
     def __init__(self, url: str): ...
