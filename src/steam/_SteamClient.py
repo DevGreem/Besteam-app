@@ -6,7 +6,7 @@ from src import AppData
 class SteamClient:
     
     """Steam API client"""
-
+    #TODO: https://store.steampowered.com/api/appdetails?appids=570
     def __init__(self, headers: dict = {}):
         """Constructor for Steam API client"""
         
@@ -15,9 +15,9 @@ class SteamClient:
         if not KEY:
             return
         
-        client = Client(KEY, headers=headers)
-        self.__users = _Users(client)
-        self.__apps = Apps(client)
+        self.__client = Client(KEY, headers=headers)
+        self.__users = _Users(self.__client)
+        self.__apps = Apps(self.__client)
 
     @property
     def users(self) -> _Users:
