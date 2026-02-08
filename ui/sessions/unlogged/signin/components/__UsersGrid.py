@@ -17,13 +17,7 @@ class UsersGrid(QGridLayout):
         steam: SteamClient = SteamClient()
         
         self.users_details: GetUserDetailsData = steam.users.get_user_details(
-            ",".join(
-                [
-                    str(item["id"])
-                    for item in 
-                    AppData.users.models_dump()
-                ]
-            ),
+            [str(item['id']) for item in AppData.users.models_dump()],
             single=False
         )
         

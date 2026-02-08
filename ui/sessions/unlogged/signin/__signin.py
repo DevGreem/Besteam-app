@@ -1,8 +1,9 @@
 from PyQt6.QtWidgets import QWidget
 from PyQt6.QtCore import pyqtSignal
 
-from src import AccountManager, Logger, Signal
+from src import AccountManager, Signal
 from src.steam import Player
+import logging
 
 from .components import UsersGrid
 
@@ -21,5 +22,5 @@ class SignInContainer(QWidget):
         self.users_container.setLayout(self.users_grid)
         
     def _on_press_user(self, user: Player):
-        Logger.log(f'Logged with {user.steamid}')
+        logging.log(0, f'Logged with {user.steamid}')
         AccountManager.login_user(user.steamid)

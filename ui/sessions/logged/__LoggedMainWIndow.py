@@ -1,10 +1,11 @@
 from PyQt6.QtGui import QResizeEvent, QShowEvent
 from PyQt6.QtWidgets import * # type: ignore
-from src import AppData, Logger
+from src import AppData
 from . import (
     WindowWrapper
 )
 from . import MainMenu, TwoSideMenu
+import logging
 
 class LoggedMainWindow(WindowWrapper):
     
@@ -15,13 +16,13 @@ class LoggedMainWindow(WindowWrapper):
         self.setMenuBar(self.menu)
         
         self.other_menu = TwoSideMenu(self)
-        self.other_menu.show()
         
         self.showMaximized()
+        self.other_menu.show()
         
     
     def resizeEvent(self, a0: QResizeEvent | None) -> None:
         super().resizeEvent(a0)
         
-        self.other_menu.resize(self.width(), self.other_menu.height())
-        Logger.log(a0.size()) # type: ignore
+        self.other_menu.setFixedWidth(self.width())
+        logging.log(0, a0.size()) # type: ignore

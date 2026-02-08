@@ -4,10 +4,7 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QSizePolicy
 )
-from PyQt6.QtGui import QResizeEvent
-from PyQt6.QtCore import QObject
-from src import Logger
-from typing import cast
+import logging
 
 class TwoSideMenu(QWidget):
     
@@ -25,7 +22,7 @@ class TwoSideMenu(QWidget):
         if parent:
             parent_size = parent.window().size() # type: ignore
             
-            Logger.log(parent_size)
+            logging.log(0, parent_size)
             self.setFixedWidth(parent_size.width())
         
         self.widgets_layout = QHBoxLayout(self)
