@@ -11,6 +11,10 @@ class UnloggedMainWindow(WindowWrapper):
     
     def __init__(self, parent=None, *args):
         super().__init__(parent)
+        self.resize(500, 500)
+        
+        central = QWidget()
+        self.setCentralWidget(central)
         
         self.actual_window: QWidget = QWidget()
         

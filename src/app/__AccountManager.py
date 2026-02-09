@@ -1,7 +1,7 @@
 from functools import lru_cache
 from PyQt6.QtCore import QObject, pyqtSignal
 from src import Signal, InvalidUserId
-from src.steam import Player
+from src.steam.models.users import Player
 from typing import cast, overload
 
 class AccountManager(QObject):

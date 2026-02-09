@@ -14,19 +14,13 @@ class TwoSideMenu(QWidget):
         super().__init__(parent=parent)
         self.show()
         
-        self.setSizePolicy(
-            QSizePolicy.Policy.Maximum,
-            QSizePolicy.Policy.Fixed
-        )
-        
         self.setFixedHeight(48)
         self.setMaximumHeight(48)
         
-        if parent:
-            parent_size = parent.window().size() # type: ignore
-            
-            logging.debug(parent_size)
-            self.setFixedWidth(parent_size.width())
+        self.setSizePolicy(
+            QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.Fixed
+        )
         
         self.widgets_layout = QHBoxLayout(self)
         

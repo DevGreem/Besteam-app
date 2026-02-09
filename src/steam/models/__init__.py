@@ -1,2 +1,2 @@
-from ._Player import Player
-from .__GetUserDetailsData import GetUserDetailsData
+from . import users
+from . import games

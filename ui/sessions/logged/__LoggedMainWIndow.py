@@ -1,58 +1,46 @@
 from PyQt6.QtGui import (
-    QResizeEvent,
-    QShowEvent
+    QResizeEvent
+)
+from PyQt6.QtCore import (
+    Qt
 )
 from PyQt6.QtWidgets import (
-    QHBoxLayout,
-    QVBoxLayout
+    QVBoxLayout,
+    QWidget,
+    QSizePolicy
 )
-from PyQt6.QtWidgets import * # type: ignore
-from src import AppData
 from . import (
     WindowWrapper
 )
 from ui.components.menu import TwoSideMenu
+from ui.components.library import GamesLibrary
 import logging
 
 class LoggedMainWindow(WindowWrapper):
     
     def __init__(self, parent=None, *args):
         super().__init__(parent)
-        self.right_layout = QVBoxLayout(self)
-        self.divided_layout = QHBoxLayout(self)
+        central = QWidget()
+        self.setCentralWidget(central)
+        
+        self.right_layout = QVBoxLayout(central)
+        
         self.__load_sections()
-        self.showMaximized()
-        self.setLayout(self.right_layout)
-        
-        
     
     def __load_sections(self):
                 
-        self.menu = TwoSideMenu(self)
-        self.menu.show()
+        self.menu = TwoSideMenu(self.centralWidget())
         
-        self.content = QWidget(self)
-        self.content.setLayout(self.divided_layout)
+        self.content = GamesLibrary(self.centralWidget())
         self.content.setSizePolicy(
-            QSizePolicy.Policy.Maximum,
-            QSizePolicy.Policy.Maximum
+            QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.Expanding
         )
         
         self.right_layout.addWidget(self.menu)
         self.right_layout.addWidget(self.content)
-        
-        self.__load_content()
-    
-    def __load_content(self):
-        
-        self.games = QWidget(self.content)
-        self.game_info = QWidget(self.content)
-        
-        self.divided_layout.addWidget(self.games)
-        self.divided_layout.addWidget(self.game_info)
     
     def resizeEvent(self, a0: QResizeEvent | None) -> None:
         super().resizeEvent(a0)
         
-        self.menu.setFixedWidth(self.width())
         logging.debug(a0.size()) # type: ignore

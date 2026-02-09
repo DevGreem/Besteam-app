@@ -1,8 +1,7 @@
 from PyQt6.QtWidgets import QWidget
-from PyQt6.QtCore import pyqtSignal
 
-from src import AccountManager, Signal
-from src.steam import Player
+from src import AccountManager
+from src.steam.models.users import Player
 import logging
 
 from ui.components.users import UsersGrid

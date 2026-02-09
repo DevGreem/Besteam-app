@@ -1,6 +1,5 @@
-import os
-from steam_web_api import Client, Apps
-from . import _Users
+from steam_web_api import Client
+from . import _Users, _Apps
 from src import AppData
 
 class SteamClient:
@@ -17,12 +16,12 @@ class SteamClient:
         
         self.__client = Client(KEY, headers=headers)
         self.__users = _Users(self.__client)
-        self.__apps = Apps(self.__client)
+        self.__apps = _Apps(self.__client)
 
     @property
     def users(self) -> _Users:
         return self.__users
 
     @property
-    def apps(self) -> Apps:
+    def apps(self) -> _Apps:
         return self.__apps

@@ -4,12 +4,13 @@ from PyQt6.QtWidgets import (
     QHBoxLayout
 )
 import logging
+from . import GameList
 
 class GamesLibrary(QWidget):
     
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self.divided_layout = QHBoxLayout(self)
+        self.divided_layout = QHBoxLayout()
         
         self.__load_sections()
         
@@ -19,17 +20,9 @@ class GamesLibrary(QWidget):
     
     def __load_sections(self):
         
-        self.games = QWidget(self)
-        self.games.setMaximumWidth(400)
-        
-        _ = self.__load_games()
+        self.games = GameList(self)
         
         self.game_info = QWidget(self)
         
         self.divided_layout.addWidget(self.games)
-    
-    async def __load_games(self):
-        pass
-    
-    def show_game_info(self, game_id: int):
-        pass
+        self.divided_layout.addWidget(self.game_info)

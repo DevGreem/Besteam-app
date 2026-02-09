@@ -2,7 +2,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QMouseEvent
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout
 from src import Signal
-from src.steam import Player
+from src.steam.models.users import Player
 from ui.components import UrlImageLabel
 from typing import cast
 

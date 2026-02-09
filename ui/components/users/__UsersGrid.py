@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QGridLayout, QWidget
 from PyQt6.QtCore import pyqtSignal
 from src import SteamClient, AppData, Signal
-from src.steam import GetUserDetailsData, Player
+from src.steam.models.users import GetUserDetailsData, Player
 from . import UserBigCard
 from typing import cast
 
