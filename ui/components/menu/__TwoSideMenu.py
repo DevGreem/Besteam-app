@@ -4,6 +4,8 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QSizePolicy
 )
+from PyQt6.QtCore import QSize
+from PyQt6.QtGui import QIcon
 import logging
 
 class TwoSideMenu(QWidget):
@@ -17,17 +19,24 @@ class TwoSideMenu(QWidget):
             QSizePolicy.Policy.Fixed
         )
         
-        self.setFixedHeight(36)
+        self.setFixedHeight(48)
+        self.setMaximumHeight(48)
         
         if parent:
             parent_size = parent.window().size() # type: ignore
             
-            logging.log(0, parent_size)
+            logging.debug(parent_size)
             self.setFixedWidth(parent_size.width())
         
         self.widgets_layout = QHBoxLayout(self)
         
+        self.__load_buttons()
+    
+    def __load_buttons(self):
+        
         home = QPushButton("Besteam")
+        home.setIcon(QIcon("icon.png"))
+        home.setIconSize(QSize(24, 24))
         
         self.widgets_layout.addWidget(home)
         

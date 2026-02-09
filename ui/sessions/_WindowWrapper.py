@@ -8,6 +8,6 @@ class WindowWrapper(QMainWindow):
         super().__init__(parent)
         self.setWindowTitle("Besteam")
         self.resize(500, 500)
-        logging.log(0, f"Opened {self.__class__}")
+        logging.debug(f"Opened {self.__class__.__name__}")
         
         StylesManager.load_style_file("ui/global.css", self)

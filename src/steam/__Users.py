@@ -17,10 +17,10 @@ class _Users(Users):
         
         users = steam_id if single else ",".join(steam_id)
         
-        logging.log(0, users)
+        logging.debug(f"Raw Users: {users}")
         
         data = super().get_user_details(users, single)
         
-        logging.log(0, data)
+        logging.debug(f"Loaded Users: {data}")
         
         return GetUserDetailsData(**data)

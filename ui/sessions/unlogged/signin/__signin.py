@@ -5,7 +5,7 @@ from src import AccountManager, Signal
 from src.steam import Player
 import logging
 
-from .components import UsersGrid
+from ui.components.users import UsersGrid
 
 class SignInContainer(QWidget):
     
@@ -22,5 +22,5 @@ class SignInContainer(QWidget):
         self.users_container.setLayout(self.users_grid)
         
     def _on_press_user(self, user: Player):
-        logging.log(0, f'Logged with {user.steamid}')
+        logging.debug(f'Logged with {user.steamid}')
         AccountManager.login_user(user.steamid)
