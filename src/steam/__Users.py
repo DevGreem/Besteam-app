@@ -3,6 +3,7 @@ from .models.users import GetUserDetailsData
 import logging
 from typing import overload, Literal
 from src.steam.models.games import SimpleGamesOwnedList, GamesOwnedList
+from functools import lru_cache
 
 class _Users(Users):
     
@@ -30,7 +31,7 @@ class _Users(Users):
     
     @overload
     def get_owned_games(self, steam_id: str, include_appinfo: Literal[False], include_free_games: bool = True) -> SimpleGamesOwnedList: ...
-    
+
     def get_owned_games(self, steam_id: str, include_appinfo: bool = True, includ_free_games: bool = True) -> GamesOwnedList|SimpleGamesOwnedList: # type: ignore        
         
         data = super().get_owned_games(steam_id, include_appinfo, includ_free_games)

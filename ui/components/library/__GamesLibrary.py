@@ -21,8 +21,12 @@ class GamesLibrary(QWidget):
     def __load_sections(self):
         
         self.games = GameList(self)
+        self.games.on_press_game.connect(self._on_press_game)
         
         self.game_info = QWidget(self)
         
         self.divided_layout.addWidget(self.games)
         self.divided_layout.addWidget(self.game_info)
+    
+    def _on_press_game(self, id: int):
+        pass

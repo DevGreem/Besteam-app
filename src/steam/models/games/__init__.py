@@ -8,3 +8,6 @@ from ._GamesOwnedList import (
     SimpleGamesOwnedList,
     GamesOwnedList
 )
+from .__GetAppDetails import (
+    GetAppDetails
+)
