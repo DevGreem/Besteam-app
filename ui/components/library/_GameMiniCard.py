@@ -5,22 +5,23 @@ from PyQt6.QtWidgets import (
     QWidget,
     QHBoxLayout,
     QLabel,
-    QSizePolicy
+    QSizePolicy,
+    QScrollArea
 )
 from PyQt6.QtCore import (
-    pyqtSignal,
     Qt
 )
-from typing import cast
 from src.steam import SteamClient
 from src.steam.models.games import OwnedGameInfo
 from src import Signal
+from typing import cast
 import logging
 
 class GameMiniCard(QWidget):
-    clicked: Signal[int] = cast(Signal[int], pyqtSignal(int))
+    clicked: Signal[int] = Signal.create(int)
+    _selected_card: "GameMiniCard|None" = None
     
-    def __init__(self, game_info: OwnedGameInfo, parent: QWidget | None = None) -> None:
+    def __init__(self, game_info: OwnedGameInfo, parent: QWidget) -> None:
         super().__init__(parent)
         self.setFixedHeight(64)
         self.setSizePolicy(
@@ -52,13 +53,41 @@ class GameMiniCard(QWidget):
         
         self.name = QLabel(game_info.name)
         self.name.setMaximumHeight(self.maximumHeight())
+        
+    def parentWidget(self) -> QWidget:
+        return super().parentWidget() #type: ignore
     
     def mousePressEvent(self, a0: QMouseEvent | None) -> None:
         
         if not a0:
             return
         
-        if a0.button() == Qt.MouseButton.LeftButton:
-            self.clicked.emit(self.info.appid)
+        if a0.button() != Qt.MouseButton.LeftButton:
+            return
+        
+        if GameMiniCard._selected_card and GameMiniCard._selected_card is not self:
+            GameMiniCard._selected_card.setStyleSheet("")
+        
+        GameMiniCard._selected_card = self
+        self.clicked.emit(self.info.appid)
+        self.__pressed_style()
         
         return super().mousePressEvent(a0)
+
+    def __pressed_style(self):
+        
+        parent = self.parentWidget()
+        
+        if isinstance(parent, QScrollArea):
+            parent = cast(QWidget, parent.viewport())
+        
+        bg_color = parent.palette().color(parent.backgroundRole())
+        
+        logging.debug(f"Parent colors: {bg_color.getRgb()}")
+        
+        hl_color = bg_color.lighter(135)
+        
+        logging.debug(f"New Mini Card Color: {hl_color.getRgb()}")
+        
+        rgba = f"rgba({', '.join(map(lambda color: str(color), hl_color.getRgb()))})"
+        self.setStyleSheet(f'background-color: {rgba}; r')

@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
     QScrollArea,
     QSizePolicy
 )
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt
 import logging
 from src import (
     SteamClient,
@@ -14,11 +14,10 @@ from src import (
 from src.steam.models.games import GamesOwnedList
 from . import GameMiniCard
 import logging
-from typing import cast
 
 class GameList(QScrollArea):
     
-    on_press_game: Signal[int] = cast(Signal[int], pyqtSignal(int))
+    on_press_game: Signal[int] = Signal.create(int)
     games: GamesOwnedList
     
     def __init__(self, parent: QWidget | None = None) -> None:
@@ -58,4 +57,5 @@ class GameList(QScrollArea):
             self.list_layout.addWidget(game_container)
     
     def __on_press_game(self, game_id: int):
-        pass
+        logging.debug(f"Game {game_id} pressed")
+        self.on_press_game.emit(game_id)

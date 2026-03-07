@@ -1,4 +1,5 @@
 from PyQt6.QtGui import (
+    QCloseEvent,
     QResizeEvent
 )
 from PyQt6.QtCore import (
@@ -44,3 +45,7 @@ class LoggedMainWindow(WindowWrapper):
         super().resizeEvent(a0)
         
         logging.debug(a0.size()) # type: ignore
+    
+    def closeEvent(self, a0: QCloseEvent | None) -> None:
+        logging.debug("Closing Logged Window...")
+        return super().closeEvent(a0)

@@ -1,1 +1,3 @@
-from ._Signal import Signal
+from ._Signal import (
+    Signal
+)

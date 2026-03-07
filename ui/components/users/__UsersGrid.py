@@ -1,13 +1,11 @@
 from PyQt6.QtWidgets import QGridLayout, QWidget
-from PyQt6.QtCore import pyqtSignal
 from src import SteamClient, AppData, Signal
 from src.steam.models.users import GetUserDetailsData, Player
 from . import UserBigCard
-from typing import cast
 
 class UsersGrid(QGridLayout):
     
-    clicked_user: Signal[Player] = cast(Signal[Player], pyqtSignal(Player))
+    clicked_user: Signal[Player] = Signal.create(Player)
     
     def __init__(self, columns: int, rows: int, parent: QWidget | None = None) -> None:
         super().__init__(parent)

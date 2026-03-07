@@ -1,14 +1,13 @@
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QMouseEvent
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout
 from src import Signal
 from src.steam.models.users import Player
 from ui.components import UrlImageLabel
-from typing import cast
 
 class UserBigCard(QWidget):
     
-    clicked: Signal[Player] = cast(Signal[Player], pyqtSignal(Player))
+    clicked: Signal[Player] = Signal.create(Player)
     
     def __init__(self, user: Player, parent: QWidget | None = None, width: int = 300, height: int = 300) -> None:
         super().__init__(parent)

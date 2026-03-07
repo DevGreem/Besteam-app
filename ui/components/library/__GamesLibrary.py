@@ -29,4 +29,5 @@ class GamesLibrary(QWidget):
         self.divided_layout.addWidget(self.game_info)
     
     def _on_press_game(self, id: int):
+        logging.debug(f"Pressed game: {id}")
         pass

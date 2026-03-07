@@ -1,7 +1,6 @@
 from PyQt6.QtGui import QResizeEvent
 from PyQt6.QtWidgets import * # type: ignore
-from PyQt6.QtCore import Qt, pyqtSignal
-from typing import cast
+from PyQt6.QtCore import Qt
 from src import (
     AppData,
     UserData,
@@ -10,7 +9,7 @@ from src import (
 
 class LogInContainer(QWidget):
     
-    on_log_user: Signal[int] = cast(Signal[int], pyqtSignal(int))
+    on_log_user: Signal[int] = Signal.create(int)
     
     def __init__(self, parent=None, *args):
         super().__init__(parent)
