@@ -1,34 +1,34 @@
 from pydantic import BaseModel
-
+from typing import Optional
 
 class Requirements(BaseModel):
     minimum: str
-    recommended: str
+    recommended: Optional[str] = None
 
 
-class Data(BaseModel):
+class GameData(BaseModel):
     type: str
     name: str
     steam_appid: int
     required_age: int
     is_free: bool
-    controller_support: str
-    dlc: list[int]
+    controller_support: Optional[str] = None
+    dlc: Optional[list[int]] = None
     detailed_description: str
     about_the_game: str
     short_description: str
-    supported_languages: str
+    supported_languages: Optional[str] = None
     header_image: str
     capsule_image: str
     capsule_imagev5: str
-    website: str
-    pc_requirements: Requirements
-    mac_requirements: Requirements
-    linux_requirements: Requirements
+    website: Optional[str] = None
+    pc_requirements: Requirements|list = []
+    mac_requirements: Requirements|list = []
+    linux_requirements: Requirements|list = []
 
 
 class AppDetail(BaseModel):
     success: bool
-    data: Data
+    data: GameData
 
-class GetAppDetails(dict[str, AppDetail]): ...
+GetAppDetails = dict[str, AppDetail]

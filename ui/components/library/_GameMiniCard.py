@@ -1,19 +1,20 @@
 
 from PyQt6.QtGui import QMouseEvent
-from ui.components import UrlImageLabel
 from PyQt6.QtWidgets import (
     QWidget,
     QHBoxLayout,
     QLabel,
     QSizePolicy,
-    QScrollArea
+    QScrollArea,
+    QStyle
 )
 from PyQt6.QtCore import (
     Qt
 )
+from src import Signal
 from src.steam import SteamClient
 from src.steam.models.games import OwnedGameInfo
-from src import Signal
+from ui.components import QUrlImage
 from typing import cast
 import logging
 
@@ -25,12 +26,13 @@ class GameMiniCard(QWidget):
         super().__init__(parent)
         self.setFixedHeight(64)
         self.setSizePolicy(
-            QSizePolicy.Policy.Expanding,
-            QSizePolicy.Policy.Fixed
+            QSizePolicy.Policy.Fixed,
+            QSizePolicy.Policy.Expanding
         )
         
         self.info_layout = QHBoxLayout()
         
+        logging.debug(f"Loading game info from game {game_info.appid}...")
         self.__load_info(game_info)
         
         self.info_layout.addWidget(self.icon)
@@ -45,14 +47,21 @@ class GameMiniCard(QWidget):
         self.info = game_info
         
         steam = SteamClient()
+        
         icon_url = steam.apps.get_app_icon(str(game_info.appid), game_info.img_icon_url)
         
-        self.icon = UrlImageLabel(icon_url)
+        self.icon = QUrlImage(self)
         self.icon.setMaximumSize(64, 64)
-        self.icon.resize(64, 64)
+        self.icon.set_image(icon_url)
+        
+        logging.debug("Loaded game icon")
         
         self.name = QLabel(game_info.name)
-        self.name.setMaximumHeight(self.maximumHeight())
+        self.name.setWordWrap(True)
+        self.name.setMaximumWidth(self.maximumWidth())
+        
+        logging.debug("Loaded game name")
+        self.adjustSize()
         
     def parentWidget(self) -> QWidget:
         return super().parentWidget() #type: ignore
@@ -90,4 +99,4 @@ class GameMiniCard(QWidget):
         logging.debug(f"New Mini Card Color: {hl_color.getRgb()}")
         
         rgba = f"rgba({', '.join(map(lambda color: str(color), hl_color.getRgb()))})"
-        self.setStyleSheet(f'background-color: {rgba}; r')
+        self.setStyleSheet(f'background-color: {rgba};')

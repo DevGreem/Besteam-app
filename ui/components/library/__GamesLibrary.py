@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
     QHBoxLayout
 )
 import logging
-from . import GameList
+from . import OwnedGamePage, GameList
 
 class GamesLibrary(QWidget):
     
@@ -23,11 +23,11 @@ class GamesLibrary(QWidget):
         self.games = GameList(self)
         self.games.on_press_game.connect(self._on_press_game)
         
-        self.game_info = QWidget(self)
+        self.game_info = OwnedGamePage(self)
         
         self.divided_layout.addWidget(self.games)
         self.divided_layout.addWidget(self.game_info)
     
     def _on_press_game(self, id: int):
         logging.debug(f"Pressed game: {id}")
-        pass
+        self.game_info.set_game(id)

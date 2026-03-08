@@ -3,7 +3,7 @@ from PyQt6.QtGui import QMouseEvent
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout
 from src import Signal
 from src.steam.models.users import Player
-from ui.components import UrlImageLabel
+from ui.components import QUrlImage
 
 class UserBigCard(QWidget):
     
@@ -18,7 +18,8 @@ class UserBigCard(QWidget):
         self.user_layout.setContentsMargins(0, 0, 0, 0)
         self.user_layout.setSpacing(0)
         
-        self.avatar = UrlImageLabel(user.avatarfull, self)
+        self.avatar = QUrlImage(self)
+        self.avatar.set_image(user.avatarfull)
         self.username = QLabel(user.personaname, self)
         
         self.user_layout.addWidget(self.avatar, 0, Qt.AlignmentFlag.AlignHCenter)

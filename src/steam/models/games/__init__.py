@@ -9,5 +9,16 @@ from ._GamesOwnedList import (
     GamesOwnedList
 )
 from .__GetAppDetails import (
-    GetAppDetails
+    GetAppDetails,
+    AppDetail,
+    GameData
+)
+from ._UserAchievement import (
+    UserAchievement
+)
+from ._PlayerStats import (
+    PlayerStats
+)
+from .__GetUserStats import (
+    GetUserStats
 )

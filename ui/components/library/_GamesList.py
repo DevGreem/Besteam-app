@@ -23,16 +23,16 @@ class GameList(QScrollArea):
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
         
-        self.setWidgetResizable(True)
+        self.setWidgetResizable(False)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setSizePolicy(
-            QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.MinimumExpanding,
             QSizePolicy.Policy.Expanding
         )
         
         self.content = QWidget()
         self.list_layout = QVBoxLayout(self.content)
-        self.list_layout.addStretch()
+        self.list_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         
         self.__search_games()
         self.__load_games()
@@ -55,7 +55,9 @@ class GameList(QScrollArea):
             game_container.clicked.connect(self.__on_press_game)
             
             self.list_layout.addWidget(game_container)
+        
+        self.adjustSize()
     
-    def __on_press_game(self, game_id: int):
-        logging.debug(f"Game {game_id} pressed")
-        self.on_press_game.emit(game_id)
+    def __on_press_game(self, game_info: int):
+        logging.debug(f"Game {game_info} pressed")
+        self.on_press_game.emit(game_info)
